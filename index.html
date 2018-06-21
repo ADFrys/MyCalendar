@@ -12,13 +12,26 @@
 	<script src='lib/jquery-ui.min.js'></script>
     <!-- Links to FullCalendar JS-->
 	<script src='fullcalendar.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Link for CDN for qTip CSS and jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.css" />
 	<title>MyCalendar</title>
 
 </head>
 <body>
-	
+<div class="container">
 	<div id='calendar'></div>
 
+  <div id="results-modal" class="modal fade" role="dialog">
+          <span class="close" data-dismiss="modal">&times;</span>
+          <h2>Schedule a Meeting</h2>
+        <div class="modal-body">
+            <form>
+                <input type="text"><label>Event Name</label></input>
+            </form>
+    </div>
+</div>
 <script>
     // After the page loads, run this function.
 	$(document).ready(function() {
@@ -31,14 +44,56 @@
       // Create a variable that stores the current year (using Moment.js)
 	  var y = date.getFullYear();
 
+    // Qtip function for clicking the calendar
+    var tooltip = $('<div/>').qtip({
+        id: 'fullcalendar',
+        prerender: true,
+        content: {
+            text: ' ',
+            title: {
+                button: true
+            }
+        },
+        position: {
+            my: 'bottom center',
+            at: 'top center',
+            target: 'mouse',
+            viewport: $('#fullcalendar'),
+            adjust: {
+                mouse: false,
+                scroll: false
+            }
+        },
+        show: false,
+        hide: false,
+        style: 'qtip-light'
+    }).qtip('api');
       // Using jQuery, display the calendar in the div with the id of calendar. Then execute the following within the object;
     $('#calendar').fullCalendar({
-        // When a day on the calendar is clicked, execute this function
-    	dayClick: function() {
-    		alert("A day has been clicked testing 123");
-    	},
-        // Boolean; Calendar can be edited
+    // Set header positioning of title, day/week/month view and prev/today/next
+        header: {
+          left: 'title',
+          center: 'agendaDay,agendaWeek,month,Year',
+          right: 'prev,today,next'
+        },
     	editable: true,
+        dayClick: function(date, jsEvent, view, resourceObject) {
+          alert("Form will appear here to enter a new event. Schedule an event on " + date.format("MM/DD/YY"));
+        },
+        // When an event is clicked, show a box with the title, start time and end time. 
+        // Times are converted from UNIX time to hh:mm using Moment.JS
+        eventClick: function(data, event, view) {
+          var content = '<h3>' + data.title + '</h3>' +
+          '<p><b>Start:</b> ' + moment(data.start, "X").format("hh:mm") + '<br />' + 
+          (data.end && '<p><b>End:</b> ' + moment(data.end, "X").format("hh:mm") + '</p>' || '');
+        tooltip.set({
+            'content.text': content
+        })
+        .reposition(event).show(event);
+        },
+        eventResizeStart: function() { tooltip.hide() },
+        eventDragStart: function() { tooltip.hide() },
+        viewDisplay: function() { tooltip.hide() },
         // Array of objects that contain event title, start date/time (using Moment.js), end date/time and a boolean named allDay Event; hours and minutes (for start and end time) are optional if the allDay boolean is set to true. 
     	events: [{
     		title: "My birthday",
