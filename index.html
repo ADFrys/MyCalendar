@@ -3,8 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/af.js"></script>
 	<link rel='stylesheet' href='fullcalendar.css' />
 	<script src='lib/jquery.min.js'></script>
 	<script src='lib/moment.min.js'></script>
@@ -23,13 +21,81 @@
 	  var d = date.getDate();
 	  var m = date.getMonth();
 	  var y = date.getFullYear();
-
     $('#calendar').fullCalendar({
+    	dayClick: function() {
+    		alert("A day has been clicked testing 123");
+    	},
     	editable: true,
     	events: [{
-    		title: "test",
-    		start: new Date(y, m, 1, 9, 00),
-    		end: new Date(y, m, 1, 10, 00),
+    		title: "My birthday",
+    		start: new Date(y, m, 6),
+    		end: new Date(y, m, 6),
+    		allDay: true
+    	  },
+		{
+    		title: "Tech Meetup Event (past)",
+    		start: new Date(y, m, 12, 13, 00),
+    		end: new Date(y, m, 12, 14, 00),
+    		allDay: false
+    	  },
+    	  {
+    		title: "Coffee with Brian",
+    		start: new Date(y, m, 21, 9, 00),
+    		end: new Date(y, m, 21, 10, 00),
+    		allDay: false
+    	  },
+		  {
+    		title: "Concert",
+    		start: new Date(y, m, 21, 17, 00),
+    		end: new Date(y, m, 21, 18, 00),
+    		allDay: false
+    	  },
+    	  {
+    		title: "Acupuncture Apt",
+    		start: new Date(y, m, 22, 11, 00),
+    		end: new Date(y, m, 22, 13, 00),
+    		allDay: false
+    	  },
+    	  {
+    		title: "Wisconsin",
+    		start: new Date(y, m, 25),
+    		end: new Date(y, m, 27),
+    		allDay: true
+    	  },
+    	  {
+    		title: "Webinar",
+    		start: new Date(y, m, 29, 9, 00),
+    		end: new Date(y, m, 29, 10, 00),
+    		allDay: false
+    	  },
+    	  {
+    		title: "Fireworks",
+    		start: new Date(y, 6, 3),
+    		end: new Date(y, 6, 3),
+    		allDay: true
+    	  },
+    	  {
+    		title: "4th Of July!",
+    		start: new Date(y, 6, 4),
+    		end: new Date(y, 6, 4),
+    		allDay: true
+    	  },
+    	  {
+    		title: "Boat Ride",
+    		start: new Date(y, 6, 7, 13, 00),
+    		end: new Date(y, 6, 7, 15, 00),
+    		allDay: false
+    	  },
+    	  {
+    		title: "Festival",
+    		start: new Date(y, 6, 13, 15, 00),
+    		end: new Date(y, 6, 13, 18, 00),
+    		allDay: false
+    	  },
+    	  {
+    		title: "Conference Call",
+    		start: new Date(y, 6, 16, 9, 00),
+    		end: new Date(y, 6, 16, 11, 00),
     		allDay: false
     	  }
     	]
