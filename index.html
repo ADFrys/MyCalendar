@@ -12,7 +12,6 @@
 	<script src='lib/jquery-ui.min.js'></script>
     <!-- Links to FullCalendar JS-->
 	<script src='fullcalendar.js'></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!--Link for CDN for qTip CSS and jQuery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.css" />
@@ -20,18 +19,9 @@
 
 </head>
 <body>
-<div class="container">
+
 	<div id='calendar'></div>
 
-  <div id="results-modal" class="modal fade" role="dialog">
-          <span class="close" data-dismiss="modal">&times;</span>
-          <h2>Schedule a Meeting</h2>
-        <div class="modal-body">
-            <form>
-                <input type="text"><label>Event Name</label></input>
-            </form>
-    </div>
-</div>
 <script>
     // After the page loads, run this function.
 	$(document).ready(function() {
@@ -44,7 +34,7 @@
       // Create a variable that stores the current year (using Moment.js)
 	  var y = date.getFullYear();
 
-    // Qtip function for clicking the calendar
+    // Qtip function for clicking the calendar for a small modal box to appear
     var tooltip = $('<div/>').qtip({
         id: 'fullcalendar',
         prerender: true,
@@ -77,8 +67,10 @@
           right: 'prev,today,next'
         },
     	editable: true,
+        /* When a day on the calendar is clicked, an alert pops up. Due to time limitations, this feature is not
+        completed yet. Currently, it pulls the calendar date clicked and uses Moment.js to convert the time. I began building a bootstrap module, but decided to remove it since I didn't have time to complete it */
         dayClick: function(date, jsEvent, view, resourceObject) {
-          alert("Form will appear here to enter a new event. Schedule an event on " + date.format("MM/DD/YY"));
+          alert("Under Construction! Form will appear here to schedule an event on " + date.format("MM/DD/YY"));
         },
         // When an event is clicked, show a box with the title, start time and end time. 
         // Times are converted from UNIX time to hh:mm using Moment.JS
