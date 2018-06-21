@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel='stylesheet' href='fullcalendar.css' />
-	<script src='lib/jquery.min.js'></script>
+    <!-- Links to jQuery library -->
+    <script src='lib/jquery.min.js'></script>
+    <!-- Links to Moment.js Library -->
 	<script src='lib/moment.min.js'></script>
+    <!-- Links to fullCalendar CSS file -->
+    <link rel='stylesheet' href='fullcalendar.css' />
+    <!-- Links to jQuery UI -->
 	<script src='lib/jquery-ui.min.js'></script>
+    <!-- Links to FullCalendar JS-->
 	<script src='fullcalendar.js'></script>
 	<title>MyCalendar</title>
 
@@ -15,30 +19,43 @@
 	
 	<div id='calendar'></div>
 
-	<script>
+<script>
+    // After the page loads, run this function.
 	$(document).ready(function() {
+      // Create a variable that stores a new date (using Moment.js documentation)
 	  var date = new Date();
+      // Create a variable that stores the current date (using Moment.js)
 	  var d = date.getDate();
+      // Create a variable that stores the current month (using Moment.js)
 	  var m = date.getMonth();
+      // Create a variable that stores the current year (using Moment.js)
 	  var y = date.getFullYear();
+
+      // Using jQuery, display the calendar in the div with the id of calendar. Then execute the following within the object;
     $('#calendar').fullCalendar({
+        // When a day on the calendar is clicked, execute this function
     	dayClick: function() {
     		alert("A day has been clicked testing 123");
     	},
+        // Boolean; Calendar can be edited
     	editable: true,
+        // Array of objects that contain event title, start date/time (using Moment.js), end date/time and a boolean named allDay Event; hours and minutes (for start and end time) are optional if the allDay boolean is set to true. 
     	events: [{
     		title: "My birthday",
-    		start: new Date(y, m, 6),
-    		end: new Date(y, m, 6),
+            // Year is set to current year (2018), month is set to June, allDay boolean is set to true; Hours/minutes are optional
+    		start: new Date(y, 5, 6),
+    		end: new Date(y, 5, 6),
     		allDay: true
     	  },
 		{
-    		title: "Tech Meetup Event (past)",
-    		start: new Date(y, m, 12, 13, 00),
-    		end: new Date(y, m, 12, 14, 00),
+    		title: "Tech Meetup Event",
+            // Year is set to current (2018), month set to June, 12 is the day (June 12), 12 is the start time, 13 is the end time (1pm); 00 is referring to minutes (12:00 for example)
+    		start: new Date(2018, 5, 12, 13, 00),
+    		end: new Date(2018, 5, 12, 14, 00),
     		allDay: false
     	  },
     	  {
+            // Year is set to current (2018), month is set to current month (currently June). When it is July, this event will appear on July 21
     		title: "Coffee with Brian",
     		start: new Date(y, m, 21, 9, 00),
     		end: new Date(y, m, 21, 10, 00),
@@ -46,32 +63,32 @@
     	  },
 		  {
     		title: "Concert",
-    		start: new Date(y, m, 21, 17, 00),
-    		end: new Date(y, m, 21, 18, 00),
+    		start: new Date(2018, 5, 21, 17, 00),
+    		end: new Date(2018, 5, 21, 18, 00),
     		allDay: false
     	  },
     	  {
     		title: "Acupuncture Apt",
-    		start: new Date(y, m, 22, 11, 00),
-    		end: new Date(y, m, 22, 13, 00),
+    		start: new Date(2018, 5, 22, 11, 00),
+    		end: new Date(2018, 5, 22, 13, 00),
     		allDay: false
     	  },
     	  {
     		title: "Wisconsin",
-    		start: new Date(y, m, 25),
-    		end: new Date(y, m, 27),
+    		start: new Date(2018, 5, 25),
+    		end: new Date(2018, 5, 27),
     		allDay: true
     	  },
     	  {
     		title: "Webinar",
-    		start: new Date(y, m, 29, 9, 00),
-    		end: new Date(y, m, 29, 10, 00),
+    		start: new Date(2018, 5, 29, 9, 00),
+    		end: new Date(2018, 5, 29, 10, 00),
     		allDay: false
     	  },
     	  {
     		title: "Fireworks",
-    		start: new Date(y, 6, 3),
-    		end: new Date(y, 6, 3),
+    		start: new Date(2018, 6, 3),
+    		end: new Date(2018, 6, 3),
     		allDay: true
     	  },
     	  {
@@ -82,27 +99,27 @@
     	  },
     	  {
     		title: "Boat Ride",
-    		start: new Date(y, 6, 7, 13, 00),
-    		end: new Date(y, 6, 7, 15, 00),
+    		start: new Date(2018, 6, 7, 13, 00),
+    		end: new Date(2018, 6, 7, 15, 00),
     		allDay: false
     	  },
     	  {
     		title: "Festival",
-    		start: new Date(y, 6, 13, 15, 00),
-    		end: new Date(y, 6, 13, 18, 00),
+    		start: new Date(2018, 6, 13, 15, 00),
+    		end: new Date(2018, 6, 13, 18, 00),
     		allDay: false
     	  },
     	  {
     		title: "Conference Call",
-    		start: new Date(y, 6, 16, 9, 00),
-    		end: new Date(y, 6, 16, 11, 00),
+    		start: new Date(2018, 6, 16, 9, 00),
+    		end: new Date(2018, 6, 16, 11, 00),
     		allDay: false
     	  }
     	]
       })
     })
- 
+
 	</script>
 	
-</body>
+  </body>
 </html>
