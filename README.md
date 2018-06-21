@@ -2,6 +2,8 @@
 
 **A calendar Application**
 
-- If you want to clone this repo and run it, you will need to create your own .env file. The .env file contains the API keys.
+- This application uses FullCalendar, a customizable and open source JavaScript event calendar https://fullcalendar.io/
 
-- A package.json file is provided in the repo, but you will have to install the dependencies (dotenv, ). For example, using command line type "npm install [name of package]".
+- MyCalendar is built using JavaScript / jQuery and Moment.js
+
+- MyCalendar can be used simply by downloading the gitHub files and opening the index.html file
