@@ -35,7 +35,7 @@
 	  var y = date.getFullYear();
 
     // Qtip function for clicking the calendar for a small modal box to appear
-    var tooltip = $('<div/>').qtip({
+    var tooltip = $('#calendar').qtip({
         id: 'fullcalendar',
         prerender: true,
         content: {
@@ -45,8 +45,8 @@
             }
         },
         position: {
-            my: 'bottom center',
-            at: 'top center',
+            my: 'center',
+            at: 'center',
             target: 'mouse',
             viewport: $('#fullcalendar'),
             adjust: {
