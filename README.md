@@ -6,4 +6,4 @@
 
 - MyCalendar is built using JavaScript / jQuery and Moment.js
 
-- MyCalendar can be used simply by downloading the gitHub files and opening the index.html file
+- MyCalendar can be used simply by downloading the gitHub files and opening the index.html file. You can also view the calendar directly here: https://adfrys.github.io/MyCalendar/
