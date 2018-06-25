@@ -219,7 +219,6 @@
 
     $(function() {
         $("#starts-at, #ends-at").datetimepicker({
-
         });
 
          $('#save-event').on('click', function() {
@@ -230,7 +229,7 @@
                     start: $('#starts-at').val(),
                     end: $('#ends-at').val()
                 };
-                $('#calendar').fullCalendar('renderEvent', eventData, true);
+                $('#calendar').fullCalendar('renderEvent', eventData, false);
                 events.push(eventData);
             }
             $('#calendar').fullCalendar('unselect');
@@ -240,6 +239,7 @@
 
             // hide modal
             $('.modal').modal('hide');
+
         });
     });
 
