@@ -15,12 +15,52 @@
         <!--Link for CDN for qTip CSS and jQuery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
 	<title>MyCalendar</title>
 
 </head>
 <body>
 
 	<div id='calendar'></div>
+<div id='datepicker'></div>
+
+<div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create new event</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Event title</label>
+                        <input type="text" name="title" id="title" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="starts-at">Starts at</label>
+                        <input type="text" name="starts_at" id="starts-at" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="ends-at">Ends at</label>
+                        <input type="text" name="ends_at" id="ends-at" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-event">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <script>
     // After the page loads, run this function.
@@ -67,10 +107,19 @@
           right: 'prev,today,next'
         },
     	editable: true,
+        selectable: true,
+        selectHelper: true,
+        themeSystem: 'standard',
+         select: function(start, end) {
+            $('.modal').modal('show');
+         },
         /* When a day on the calendar is clicked, an alert pops up. Due to time limitations, this feature is not
         completed yet. Currently, it pulls the calendar date clicked and uses Moment.js to convert the time. I began building a bootstrap module, but decided to remove it since I didn't have time to complete it */
-        dayClick: function(date, jsEvent, view, resourceObject) {
-          alert("Under Construction! Form will appear here to schedule an event on " + date.format("MM/DD/YY"));
+        dayClick: function(event, element) {
+            $('.modal').modal('show');
+            $('.modal').find('#title').val(event.title);
+            $('.modal').find('#starts-at').val(event.start);
+            $('.modal').find('#ends-at').val(event.end);
         },
         // When an event is clicked, show a box with the title, start time and end time. 
         // Times are converted from UNIX time to hh:mm using Moment.JS
@@ -164,7 +213,28 @@
     	  }
     	]
       })
-    })
+    });
+
+ $("#starts-at, #ends-at").datetimepicker();
+
+         $('#save-event').on('click', function() {
+            var title = $('#title').val();
+            if (title) {
+                var eventData = {
+                    title: title,
+                    start: $('#starts-at').val(),
+                    end: $('#ends-at').val()
+                };
+                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+            }
+            $('#calendar').fullCalendar('unselect');
+
+            // Clear modal inputs
+            $('.modal').find('input').val('');
+
+            // hide modal
+            $('.modal').modal('hide');
+        });
 
 	</script>
 	
