@@ -12,3 +12,5 @@ Contact Info: angela.frys@att.net and angela.frys@gmail.com
 
 
 Current Open Issue: Bootstrap DateTime Widget in modal is not showing the calendar with dates/times shown. However, the current date/time defaults when the input box is clicked. The event is saved in the calendar. Exploring documentation to resolve this issue with the DateTime widget. 
+
+- Next Steps: Data does not persist; will need to create an api with a backend. 
